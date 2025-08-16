@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sell List</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:#f7f7f8;color:#111}
+  header{position:sticky;top:0;background:#fff;padding:14px 16px;border-bottom:1px solid #e6e6e7}
+  .wrap{max-width:1100px;margin:0 auto;padding:16px}
+  .controls{display:flex;gap:8px;flex-wrap:wrap}
+  input,select{padding:10px 12px;border:1px solid #ddd;border-radius:10px;min-width:180px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:12px}
+  .card{background:#fff;border:1px solid #eee;border-radius:16px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .thumb{aspect-ratio:1/1;object-fit:cover;width:100%;background:#fafafa}
+  .body{padding:12px}
+  .title{font-weight:600;margin:0 0 6px}
+  .price{font-weight:700}
+  .meta{font-size:12px;color:#666;margin-top:4px}
+  .desc{font-size:14px;color:#333;margin-top:8px}
+  .btn{display:inline-block;margin-top:10px;padding:10px 12px;border-radius:12px;background:#111;color:#fff;text-decoration:none}
+  footer{padding:40px 16px;color:#777;text-align:center}
+  .tag{font-size:11px;background:#f0f0f2;border:1px solid #e6e6e8;border-radius:999px;padding:4px 8px;margin-left:8px}
+</style>
+<header>
+  <div class="wrap">
+    <div class="controls">
+      <input id="q" placeholder="Search items…" />
+      <select id="cat"><option value="">All categories</option></select>
+      <select id="cond"><option value="">Any condition</option></select>
+      <select id="status"><option value="">All</option><option>For sale</option><option>Sold</option></select>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+  <div id="grid" class="grid"></div>
+</div>
+<footer>Questions? Email me: <a href="mailto:you@example.com">you@example.com</a></footer>
+<script>
+  // 👉 Replace with your items (or load a JSON file).
+  const ITEMS = [
+    {title:"Canon EOS M50", price:350, condition:"Good", category:"Camera",
+     status:"For sale", desc:"Includes kit lens + 2 batteries.", img:"https://images.unsplash.com/photo-1519183071298-a2962be96f83?q=80&w=800",
+     link:"https://pay.me/yourlink"},
+    {title:"IKEA Desk", price:80, condition:"Fair", category:"Furniture",
+     status:"For sale", desc:"47\"x23\", minor scuffs.", img:"https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800",
+     link:"mailto:you@example.com"},
+    {title:"AirPods Pro (2nd gen)", price:120, condition:"Like New", category:"Electronics",
+     status:"Sold", desc:"Barely used, includes case.", img:"https://images.unsplash.com/photo-1588421357574-87938a86fa28?q=80&w=800",
+     link:"#"}
+  ];
+
+  const qs = s => document.querySelector(s);
+  const grid = qs("#grid"), q = qs("#q"), cat = qs("#cat"), cond = qs("#cond"), status = qs("#status");
+  const cats = [...new Set(ITEMS.map(i=>i.category))], conds = [...new Set(ITEMS.map(i=>i.condition))];
+  cats.forEach(c=>cat.insertAdjacentHTML("beforeend", `<option>${c}</option>`));
+  conds.forEach(c=>cond.insertAdjacentHTML("beforeend", `<option>${c}</option>`));
+
+  function render(){
+    const term = q.value.toLowerCase();
+    const filtered = ITEMS.filter(i =>
+      (!cat.value || i.category===cat.value) &&
+      (!cond.value || i.condition===cond.value) &&
+      (!status.value || i.status===status.value) &&
+      (i.title.toLowerCase().includes(term) || (i.desc||"").toLowerCase().includes(term))
+    );
+    grid.innerHTML = filtered.map(i => `
+      <div class="card">
+        <img class="thumb" src="${i.img}" alt="">
+        <div class="body">
+          <div class="title">${i.title} <span class="tag">${i.category}</span></div>
+          <div class="price">$${i.price} <span class="meta">• ${i.condition} • ${i.status}</span></div>
+          ${i.desc?`<div class="desc">${i.desc}</div>`:""}
+          ${i.link?`<a class="btn" href="${i.link}" target="_blank" rel="noopener">Contact / Buy</a>`:""}
+        </div>
+      </div>
+    `).join("") || "<p>No matches.</p>";
+  }
+  [q,cat,cond,status].forEach(el=>el.addEventListener("input", render));
+  render();
+</script>
+</html>
