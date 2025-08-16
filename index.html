@@ -38,17 +38,110 @@
 <script>
   // 👉 Replace with your items (or load a JSON file).
   const ITEMS = [
-    {title:"Canon EOS M50", price:350, condition:"Good", category:"Camera",
-     status:"For sale", desc:"Includes kit lens + 2 batteries.", img:"https://images.unsplash.com/photo-1519183071298-a2962be96f83?q=80&w=800",
-     link:"https://pay.me/yourlink"},
-    {title:"IKEA Desk", price:80, condition:"Fair", category:"Furniture",
-     status:"For sale", desc:"47\"x23\", minor scuffs.", img:"https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800",
-     link:"mailto:you@example.com"},
-    {title:"AirPods Pro (2nd gen)", price:120, condition:"Like New", category:"Electronics",
-     status:"Sold", desc:"Barely used, includes case.", img:"https://images.unsplash.com/photo-1588421357574-87938a86fa28?q=80&w=800",
-     link:"#"}
-  ];
-
+  {title:"Gray Sofa", price:350, condition:"Good, with some scratched on the sides", category:"Furniture",
+     status:"For free", desc:"It can be disassembled for transport.", img:"images/sofa.jpeg"
+    },
+  {
+    title: "Black+Decker Variable Control Steam Iron",
+    price: 8,
+    condition: "Almost New",
+    category: "Appliances",
+    status: "For sale",
+    desc: "",
+    img: "images/black-decker-steam-iron.jpeg",
+    link: "mailto:you@example.com"
+  },
+  {
+    title: "Wooden TV Stand",
+    price: 40,
+    condition: "Good",
+    category: "Furniture",
+    status: "For sale",
+    desc: "",
+    img: "images/wooden-tv-stand.jpeg",
+    link: "mailto:you@example.com"
+  },
+  {
+    title: "Walking Pad Under Desk Treadmill",
+    price: 60,
+    condition: "Almost New",
+    category: "Fitness",
+    status: "For sale",
+    desc: "",
+    img: "images/walking-pad-under-desk-treadmill.jpeg",
+    link: "mailto:you@example.com"
+  },
+  {
+    title: "Foldable Writing Table",
+    price: 35,
+    condition: "Almost New",
+    category: "Furniture",
+    status: "For sale",
+    desc: "",
+    img: "images/foldable-writing-table.jpeg",
+    link: "mailto:you@example.com"
+  },
+  {
+    title: "15 LB Dumbbell",
+    price: 7,
+    condition: "Almost New",
+    category: "Fitness",
+    status: "For sale",
+    desc: "",
+    img: "images/15lb-dumbbell.jpeg",
+    link: "mailto:you@example.com"
+  },
+  {
+    title: "16in Misting Tower Fan",
+    price: 20,
+    condition: "Good",
+    category: "Fans",
+    status: "For sale",
+    desc: "",
+    img: "images/16in-misting-tower-fan.jpeg",
+    link: "mailto:you@example.com"
+  },
+  {
+    title: "700 Watts Microwave Oven",
+    price: 20,
+    condition: "Good",
+    category: "Appliances",
+    status: "For sale",
+    desc: "",
+    img: "images/700w-microwave-oven.jpeg",
+    link: "mailto:you@example.com"
+  },
+  {
+    title: "Dreo Tower Fan",
+    price: 40,
+    condition: "Good",
+    category: "Fans",
+    status: "For sale",
+    desc: "",
+    img: "images/dreo-tower-fan.jpeg",
+    link: "mailto:you@example.com"
+  },
+  {
+    title: "Floor Lamp with Shade",
+    price: 5,
+    condition: "Good",
+    category: "Furniture",
+    status: "For sale",
+    desc: "",
+    img: "images/floor-lamp-with-shade.jpeg",
+    link: "mailto:you@example.com"
+  },
+  {
+    title: "Lasko Pedestal Fan",
+    price: 10,
+    condition: "Used",
+    category: "Fans",
+    status: "For sale",
+    desc: "",
+    img: "images/lasko-pedestal-fan.jpeg",
+    link: "mailto:you@example.com"
+  }
+];
   const qs = s => document.querySelector(s);
   const grid = qs("#grid"), q = qs("#q"), cat = qs("#cat"), cond = qs("#cond"), status = qs("#status");
   const cats = [...new Set(ITEMS.map(i=>i.category))], conds = [...new Set(ITEMS.map(i=>i.condition))];
